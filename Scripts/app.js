@@ -9,5 +9,7 @@ for (let i = 1; i <= gridSize * gridSize; ++i) {
     let gridDiv = document.createElement('div');
     gridDiv.id = 'gridDiv'+i;
     gridDiv.className ='gridDiv';
+    gridDiv.style.width = `${tileSize}px`;
+    gridDiv.style.height = `${tileSize}px`;
     gridContainer.appendChild(gridDiv);
 }
