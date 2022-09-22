@@ -1,15 +1,32 @@
-
-.container {
+body {
     display: flex;
-    flex-wrap: wrap;
-    justify-content:center;
-    align-items:center;
-    background-color: blue;
+    justify-content: center;
+    align-items: center;
+    background-color: #F8F0E3;
+    border-top: 100px;
+    
+}
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 100px;
+    max-width: 1100px;
+    margin: 0, auto;
+
+}
+
+
+
+#grid {
+    display: grid;
     width:500px;
     height:500px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-.gridDiv{
-    background-color: red;
+.tile{
+    user-select: none;
     /* height: 31.25px;
     width: 31.25px; */
 }
+
