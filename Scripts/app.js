@@ -97,8 +97,8 @@ function generateGrid(gridSize) {
 
     for (let i = 1; i <= gridSize * gridSize; ++i) {
         let tile = document.createElement('div');
-        tile.addEventListener ('mousedown', paint());
-        tile.addEventListener ('mouseover', paint());
+        tile.addEventListener ('mousedown', paint);
+        tile.addEventListener ('mouseover', paint);
         tile.id = 'tile'+i;
         tile.className ='tile';
         grid.appendChild(tile);
@@ -106,11 +106,16 @@ function generateGrid(gridSize) {
 };
 
 //Check for mouse down (hold to paint functionality)
+//document.body.onmousedown = () => (drawState = true) 
 body.addEventListener ('mousedown', () => {drawState = true});
 body.addEventListener ('mouseup', () => {drawState = false});
 
 //paint the tiles
-function paint () {};
+function paint (e) {
+    if (e.type ==='mouseover' && !drawState) return;
+    e.target.style.backgroundColor = 'black';
+    
+};
 
 
 generateGrid(gridSize)
