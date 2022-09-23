@@ -1,94 +1,18 @@
-/* //Variables
-let drawState = false;
-let mousePosition = { x:-1, y:-1};
-// let eraseState = false;
-//ui
-const gridContainer = document.querySelector('.gridContainer');
-const rangeContainer = document.querySelector('.rangeContainer');
-const gSlider = document.querySelector('.gSlider');
-
-
-
-
-
-/* window.addEventListener('mousedown', function(e)  {
-    if (e.buttons===1){
-        drawState = true;
-    }
-}); 
-window.addEventListener('mouseup', function(e)  {
-    //if (e.buttons===1){
-        drawState = false;
-        console.log('Hello Draw state should be false now')
-    //}
-}); */
-
-//create div grid
-/*function createGrid (gridSize){
-    let tileSize = 500/gridSize;
-    console.log(tileSize);
-    for (let i = 1; i <= gridSize * gridSize; ++i) {
-        let gridDiv = document.createElement('div');
-        gridDiv.id = 'gridDiv'+i;
-        gridDiv.className ='gridDiv';
-        gridDiv.style.width = `${tileSize}px`;
-        gridDiv.style.height = `${tileSize}px`;
-        gridContainer.appendChild(gridDiv);
-        gridDiv.addEventListener ('click', (e) => {
-            gridDiv.style.backgroundColor = 'black';
-        });
-    }
-}
-
-
-createGrid(16);
-
-let handleMousemove = (e) => {
-    mousePosition.x = e.x;
-    mousePosition.y = e.y;
-
-    if (drawState){
-        let elem = document.elementFromPoint(mousePosition.x, mousePosition.y);
-        
-        if(elem.className = 'gridDiv')
-        {
-            elem.click();
-        } 
-    }
-}
-
-let handleMousedown = (e) => {
-    drawState = true;
-}
-
-let handleMouseup = (e) => {
-    drawState = false;
-}
-
-
-document.addEventListener('mousemove', handleMousemove);
-document.addEventListener('mousedown', handleMousedown);
-document.addEventListener('mouseup', handleMouseup);
-
-
-
-function paintHelper(color, gridDiv){
-
-}
-
-function paintBlack(gridDiv){
-    if (isDrawing){
-        gridDiv.style.backgroundColor = "black"; 
-    };
-} */
-
 //variables
 let gridSize = (16);
 let drawState = false;
+let paintMode = 'colour';
 
 //DOM
 const grid = document.getElementById('grid');
 const body = document.querySelector('body');
+const colour = document.getElementById('defaultBtn');
+const eraser = document.getElementById('eraserBtn');
+const shading = document.getElementById('shadingBtn');
+const rainbow = document.getElementById('rainbowBtn');
+const reset = document.getElementById('resetBtn');
+const tileRange = document.getElementById('tileRange');
+const outputBbl = document.getElementsByClassName('outputBbl');
 
 //generate the tiles within the grid
 function generateGrid(gridSize) {
@@ -106,15 +30,36 @@ function generateGrid(gridSize) {
 };
 
 //Check for mouse down (hold to paint functionality)
-//document.body.onmousedown = () => (drawState = true) 
 body.addEventListener ('mousedown', () => {drawState = true});
 body.addEventListener ('mouseup', () => {drawState = false});
+//Tile slider
+tileSizer.addEventListener('input', () => {
+    setTileOutput(tileRange, outputBbl);
+});
+
+function setTileOutput(range, outputBbl) {
+    const val = range.value;
+    const min = range.min ? range.min : 0;
+    const max = range.max ? range.max : 100;
+    const newVal = Number(((val - min) * 100) / (max - min));
+    outputBbl.innerHTML = val;
+
+    outputBbl.style.left = newVal = '%';
+}
+
+//Mode Changing
+colour.addEventListener ('click', () =>{
+    paintMode = 'colour'
+    if (paintMode ='colour'){
+        colour.classList.add('activeBtn');
+    }
+} )
 
 //paint the tiles
 function paint (e) {
     if (e.type ==='mouseover' && !drawState) return;
     e.target.style.backgroundColor = 'black';
-    
+
 };
 
 
