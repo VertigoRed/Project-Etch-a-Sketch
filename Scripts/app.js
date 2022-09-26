@@ -1,5 +1,5 @@
 //variables
-let gridSize = (16);
+let gridSize = 16;
 let drawState = false;
 let paintMode = 'colour';
 
@@ -11,11 +11,14 @@ const eraser = document.getElementById('eraserBtn');
 const shading = document.getElementById('shadingBtn');
 const rainbow = document.getElementById('rainbowBtn');
 const reset = document.getElementById('resetBtn');
-const tileRange = document.getElementById('tileRange');
-const outputBbl = document.getElementsByClassName('outputBbl');
+const btn8x8 = document.getElementById('8x8');
+const btn16x16 = document.getElementById('16x16');
+const btn32x32 = document.getElementById('32x32');
+const btn64x64 = document.getElementById('64x64');
 
 //generate the tiles within the grid
-function generateGrid(gridSize) {
+function generateGrid(){
+    clearGrid();
     grid.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`
     grid.style.gridTemplateRows = `repeat (${gridSize}, 1fr)`
 
@@ -28,32 +31,37 @@ function generateGrid(gridSize) {
         grid.appendChild(tile);
     }
 };
+//clear the grid
+function clearGrid(){
+    grid.innerHTML = '';
+}
 
 //Check for mouse down (hold to paint functionality)
 body.addEventListener ('mousedown', () => {drawState = true});
 body.addEventListener ('mouseup', () => {drawState = false});
-//Tile slider
-tileSizer.addEventListener('input', () => {
-    setTileOutput(tileRange, outputBbl);
+
+//Mode Buttons
+colour.addEventListener ('click', () =>{
+    paintMode = 'colour'; 
+    if (paintMode = 'colour'){
+        colour.classList.add('.button-85:before');
+    } else {
+        colour.classList.remove('.button-85:before');
+    }
 });
 
-function setTileOutput(range, outputBbl) {
-    const val = range.value;
-    const min = range.min ? range.min : 0;
-    const max = range.max ? range.max : 100;
-    const newVal = Number(((val - min) * 100) / (max - min));
-    outputBbl.innerHTML = val;
+eraser.addEventListener ('click', () =>{paintMode = 'eraser'});
+shading.addEventListener ('click', () =>{paintMode = 'shading'});
+rainbow.addEventListener ('click', () =>{paintMode = 'rainbow'});
+reset.addEventListener ('click', () =>{generateGrid()});
 
-    outputBbl.style.left = newVal = '%';
-}
 
-//Mode Changing
-colour.addEventListener ('click', () =>{
-    paintMode = 'colour'
-    if (paintMode ='colour'){
-        colour.classList.add('activeBtn');
-    }
-} )
+
+//Size Buttons
+btn8x8.addEventListener ('click', () =>{gridSize = 8; generateGrid()});
+btn16x16.addEventListener ('click', () =>{gridSize = 16; generateGrid()});
+btn32x32.addEventListener ('click', () =>{gridSize = 32; generateGrid()});
+btn64x64.addEventListener ('click', () =>{gridSize = 64; generateGrid()});
 
 //paint the tiles
 function paint (e) {
@@ -63,4 +71,4 @@ function paint (e) {
 };
 
 
-generateGrid(gridSize)
+generateGrid()

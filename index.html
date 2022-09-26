@@ -12,21 +12,23 @@
     <div class='header'><h1>Etch-a-Sketch</h1></div>
     <div class='main'>
         <div id='settings' class='settings'>
-            <h2>Modes:</h2>
+            <h2>Modes</h2>
             <div class = 'btnContainer'>
-                <button type='button' class='settingsBtn' id ='defaultBtn'>Default?</button>
-                <button type='button' class='settingsBtn' id ='eraserBtn'>Eraser</button>
-                <button type='button' class='settingsBtn' id ='shadingBtn'>Shading</button>
-                <button type='button' class='settingsBtn' id='rainbowBtn'>Rainbow</button>
-                <button type='button' class='settingsBtn' id='resetBtn'>Reset</button>
-            </div>
-            <h3>Grid Size:</h3>
-            <div class='sliderContainer'>
-                <input type='range' min='4' max='100' value="16" class='tileSizer' id='tileRange'>
-                <output class='outputBubble'></output>
+                <button type='button' class='button' id ='defaultBtn'>Colour</button>
+                <button type='button' class='button' id ='eraserBtn'>Eraser</button>
+                <button type='button' class='button' id ='shadingBtn'>Shading</button>
+                <button type='button' class='button' id='rainbowBtn'>Rainbow</button>
+                <button type='button' class='button' id='resetBtn'>Reset</button>
             </div>
         </div>
         <div id='grid' class = 'grid'></div>
+        <div id='gridSizes' class='gridSizes'>
+            <h2>Sizes</h2>
+            <button type='button' class='button' id ='8x8'>Small</button>
+            <button type='button' class='button' id ='16x16'>Medium</button>
+            <button type='button' class='button' id='32x32'>Large</button>
+            <button type='button' class='button' id='64x64'>Extra Large</button>
+        </div>
     </div>
     <div class='footer'></div>
 </body>
