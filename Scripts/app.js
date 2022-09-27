@@ -61,36 +61,44 @@ function paint (e) {
             e.target.style.backgroundColor = `${colourHelper(e)}`;
             break;
         case 'eraser':
-            e.target.style.backgroundColor = 'white';
+            e.target.style.backgroundColor = `${eraserHelper(e)}`;
             break;
         case 'shading':
             //e.target.style.backgroundColor = `${shadingHelper(e)}`;
-            e.target.style.backgroundColor = `rgb(${shadingHelper(e)})`
+            e.target.style.backgroundColor = `rgb(${shadingHelper(e)})`;
             break;
         case 'rainbow':
+            e.target.style.backgroundColor = `rgb(${rainbowHelper()})`;
             break;
     }
 };
 //Default colouring function
 function colourHelper() {
-    return 'rgb(250,100,240)'
+    return 'rgb(0,0,0)';
 }
 //eraser function
-function eraserHelper() {}
+function eraserHelper() {
+    return 'rgb(255,255,255)';
+}
 
 //shading function
 function shadingHelper(e) {
-        const currentColour = getComputedStyle(e.target).getPropertyValue("background-color").match(/\d+/g).map(Number);
-        outputColour = currentColour.map (function(value){
-            if (value > 0){
-                return value - 35;
-            } else {
+    const currentColour = getComputedStyle(e.target).getPropertyValue("background-color").match(/\d+/g).map(Number);
+    outputColour = currentColour.map (function(value){
+        if (value > 0){
+            return value - 35;
+        } else {
                 return 0;
             }
         });
-        return outputColour.join();
+    return outputColour.join();
 }
-function rainbowHelper() {}
+
+//rainbow brush function
+function rainbowHelper() {
+    const outputColour = Array(3).fill().map(()=> Math.floor(255 * Math.random()));
+    return outputColour.join();
+}
 
 
 generateGrid()
