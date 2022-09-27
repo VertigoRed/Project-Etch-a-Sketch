@@ -36,26 +36,16 @@ function clearGrid(){
     grid.innerHTML = '';
 }
 
-//Check for mouse down (hold to paint functionality)
+//Check for mouse down (hold to paint)
 body.addEventListener ('mousedown', () => {drawState = true});
 body.addEventListener ('mouseup', () => {drawState = false});
 
 //Mode Buttons
-colour.addEventListener ('click', () =>{
-    paintMode = 'colour'; 
-    if (paintMode = 'colour'){
-        colour.classList.add('.button-85:before');
-    } else {
-        colour.classList.remove('.button-85:before');
-    }
-});
-
+colour.addEventListener ('click', () =>{paintMode = 'colour'});
 eraser.addEventListener ('click', () =>{paintMode = 'eraser'});
 shading.addEventListener ('click', () =>{paintMode = 'shading'});
 rainbow.addEventListener ('click', () =>{paintMode = 'rainbow'});
 reset.addEventListener ('click', () =>{generateGrid()});
-
-
 
 //Size Buttons
 btn8x8.addEventListener ('click', () =>{gridSize = 8; generateGrid()});
@@ -66,9 +56,42 @@ btn64x64.addEventListener ('click', () =>{gridSize = 64; generateGrid()});
 //paint the tiles
 function paint (e) {
     if (e.type ==='mouseover' && !drawState) return;
-    e.target.style.backgroundColor = 'black';
-
+    switch (paintMode){
+        case 'colour':
+            e.target.style.backgroundColor = `${colourHelper(e)}`;
+            break;
+        case 'eraser':
+            e.target.style.backgroundColor = 'white';
+            break;
+        case 'shading':
+            //e.target.style.backgroundColor = `${shadingHelper(e)}`;
+            e.target.style.backgroundColor = `rgb(${shadingHelper(e)})`
+            break;
+        case 'rainbow':
+            break;
+    }
 };
+//Default colouring function
+function colourHelper() {
+    return 'rgb(250,100,240)'
+}
+//eraser function
+function eraserHelper() {}
+
+//shading function
+function shadingHelper(e) {
+        const currentColour = getComputedStyle(e.target).getPropertyValue("background-color").match(/\d+/g).map(Number);
+        outputColour = currentColour.map (function(value){
+            if (value > 0){
+                return value - 35;
+            } else {
+                return 0;
+            }
+        });
+        return outputColour.join();
+}
+function rainbowHelper() {}
 
 
 generateGrid()
+
