@@ -5,6 +5,9 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <link rel='stylesheet' href='Styles/style.css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script src='Scripts/app.js' defer></script>
     <title>Etch-a-Sketch</title>
 </head>
@@ -14,11 +17,11 @@
         <div id='settings' class='settings'>
             <h2>Modes</h2>
             <div class = 'btnContainer'>
-                <button type='button' class='button' id ='defaultBtn'>Colour</button>
+                <input type="color" id="colourPicker"/>
+                <button type='button' class='button' id ='defaultBtn'>Brush</button>
                 <button type='button' class='button' id ='eraserBtn'>Eraser</button>
-                <button type='button' class='button' id ='shadingBtn'>Shading</button>
+                <button type='button' class='button' id ='shadingBtn'>Shader</button>
                 <button type='button' class='button' id='rainbowBtn'>Rainbow</button>
-                <button type='button' class='button' id='resetBtn'>Reset</button>
             </div>
         </div>
         <div id='grid' class = 'grid'></div>
@@ -29,6 +32,18 @@
             <button type='button' class='button' id='32x32'>Large</button>
             <button type='button' class='button' id='64x64'>Extra Large</button>
         </div>
+    </div>
+    <div class="second">
+        <button type='button' class='button' id='resetBtn'>Reset</button>
+        <button type='button' class='button' id='fillBtn'>Fill</button>
+        <h4>Grid Lines:</h4>
+        <div id='gridSwitch'>
+            <label class='switch'>
+                <input type='checkbox'checked>
+                <span class='slider'></span>
+            </label>
+        </div>
+
     </div>
     <div class='footer'></div>
 </body>

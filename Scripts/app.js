@@ -2,19 +2,24 @@
 let gridSize = 16;
 let drawState = false;
 let paintMode = 'colour';
+let brushColour = '#000000';
+let gridLines = true;
 
 //DOM
-const grid = document.getElementById('grid');
 const body = document.querySelector('body');
+const grid = document.getElementById('grid');
+const colourPicker = document.getElementById('colourPicker')
 const colour = document.getElementById('defaultBtn');
 const eraser = document.getElementById('eraserBtn');
 const shading = document.getElementById('shadingBtn');
 const rainbow = document.getElementById('rainbowBtn');
-const reset = document.getElementById('resetBtn');
 const btn8x8 = document.getElementById('8x8');
 const btn16x16 = document.getElementById('16x16');
 const btn32x32 = document.getElementById('32x32');
 const btn64x64 = document.getElementById('64x64');
+const reset = document.getElementById('resetBtn');
+const fill = document.getElementById('fillBtn');
+const gridSwitch = document.getElementById('gridSwitch');
 
 //generate the tiles within the grid
 function generateGrid(){
@@ -27,10 +32,11 @@ function generateGrid(){
         tile.addEventListener ('mousedown', paint);
         tile.addEventListener ('mouseover', paint);
         tile.id = 'tile'+i;
-        tile.className ='tile';
+        tile.className ='tile gridLines';
         grid.appendChild(tile);
     }
 };
+
 //clear the grid
 function clearGrid(){
     grid.innerHTML = '';
@@ -41,17 +47,42 @@ body.addEventListener ('mousedown', () => {drawState = true});
 body.addEventListener ('mouseup', () => {drawState = false});
 
 //Mode Buttons
-colour.addEventListener ('click', () =>{paintMode = 'colour'});
-eraser.addEventListener ('click', () =>{paintMode = 'eraser'});
-shading.addEventListener ('click', () =>{paintMode = 'shading'});
-rainbow.addEventListener ('click', () =>{paintMode = 'rainbow'});
-reset.addEventListener ('click', () =>{generateGrid()});
+colourPicker.addEventListener('input', () => {brushColour = colourPicker.value;});
+colour.addEventListener ('click', () =>{paintMode = 'colour'; setActiveMode()});
+eraser.addEventListener ('click', () =>{paintMode = 'eraser'; setActiveMode()});
+shading.addEventListener ('click', () =>{paintMode = 'shading'; setActiveMode()});
+rainbow.addEventListener ('click', () =>{paintMode = 'rainbow'; setActiveMode()});
 
 //Size Buttons
 btn8x8.addEventListener ('click', () =>{gridSize = 8; generateGrid()});
 btn16x16.addEventListener ('click', () =>{gridSize = 16; generateGrid()});
 btn32x32.addEventListener ('click', () =>{gridSize = 32; generateGrid()});
 btn64x64.addEventListener ('click', () =>{gridSize = 64; generateGrid()});
+
+//general buttons
+reset.addEventListener ('click', () =>{generateGrid()});
+fill.addEventListener ('click', ()=>{
+    const currentTiles = document.querySelectorAll('.tile');
+    currentTiles.forEach((tile) => {
+        tile.style.backgroundColor = `${brushColour}`;
+    });
+});
+//grid lines on/off
+gridSwitch.addEventListener('change', (e) =>{
+    const currentTiles = document.querySelectorAll('.tile');
+    console.log('Hello!')
+    if (e.target.checked){
+        console.log('I am checked');
+        currentTiles.forEach((tile) => {
+            tile.classList.add('gridLines');
+        })
+    } else {
+        console.log('I am not checked');
+        currentTiles.forEach((tile) => {
+            tile.classList.remove('gridLines');
+        })
+    }
+});
 
 //paint the tiles
 function paint (e) {
@@ -74,7 +105,7 @@ function paint (e) {
 };
 //Default colouring function
 function colourHelper() {
-    return 'rgb(0,0,0)';
+    return brushColour;
 }
 //eraser function
 function eraserHelper() {
@@ -100,6 +131,32 @@ function rainbowHelper() {
     return outputColour.join();
 }
 
+function setActiveMode() {
+    if (paintMode==='colour'){
+        colour.classList.add('activeBtn');
+    } else {
+        colour.classList.remove('activeBtn');
+    };
+    if (paintMode==='eraser'){
+        eraser.classList.add('activeBtn');
+    } else {
+        eraser.classList.remove('activeBtn');
+    };
+    if (paintMode==='shading'){
+        shading.classList.add('activeBtn');
+    } else {
+        shading.classList.remove('activeBtn');
+    };
+    if (paintMode==='rainbow'){
+        rainbow.classList.add('activeBtn');
+    } else {
+        rainbow.classList.remove('activeBtn');
+    };      
+}
+function setActiveSize(){
+    
+}
 
+setActiveMode()
 generateGrid()
 
