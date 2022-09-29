@@ -7,8 +7,15 @@ body {
     gap: 10px;
     flex-direction: column;
     font-family: 'Roboto', sans-serif;
-    background-color: #F8F0E3;
+    background-color: #F0F0F0;
+    margin-bottom: 100px;
     
+}
+.title{
+  font-size: 60px;
+}
+.sub-title{
+  font-size: 30px;
 }
 .main {
     display: flex;
@@ -56,7 +63,7 @@ body {
     grid-gap: 8px;
     align-items: center;
     background: 0 0;
-    border: 1px solid #000;
+    border: 2px solid #000;
     border-radius: 4px;
     cursor: pointer;
     display: inline-flex;
@@ -73,7 +80,7 @@ body {
     white-space: nowrap;
 }
 .button:hover {
-        box-shadow: 4px 4px 0 #000;
+        box-shadow: 4px 4px 0 black;
         transform: translate(-4px,-4px);
     }
 .button:focus-visible{
@@ -82,10 +89,11 @@ body {
 
 .activeBtn{
   background-color: black;
+  border: 2px solid green;
   color: white;
 }
 .activeBtn:hover{
-  box-shadow: 4px 4px 0 red;
+  box-shadow: 4px 4px 0 green;
   transform: translate(-4px,-4px);
 }
 
@@ -98,7 +106,7 @@ body {
     width:500px;
     height:500px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border: 5px solid royalblue;
+    border: px solid black;
 }
 .tile{
     user-select: none;
@@ -165,4 +173,18 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
+.footer{
+  box-sizing:border-box;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  font-size: 20px;
+
+}
 

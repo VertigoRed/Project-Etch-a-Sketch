@@ -54,10 +54,10 @@ shading.addEventListener ('click', () =>{paintMode = 'shading'; setActiveMode()}
 rainbow.addEventListener ('click', () =>{paintMode = 'rainbow'; setActiveMode()});
 
 //Size Buttons
-btn8x8.addEventListener ('click', () =>{gridSize = 8; generateGrid()});
-btn16x16.addEventListener ('click', () =>{gridSize = 16; generateGrid()});
-btn32x32.addEventListener ('click', () =>{gridSize = 32; generateGrid()});
-btn64x64.addEventListener ('click', () =>{gridSize = 64; generateGrid()});
+btn8x8.addEventListener ('click', () =>{gridSize = 8; generateGrid(); setActiveSize()});
+btn16x16.addEventListener ('click', () =>{gridSize = 16; generateGrid(); setActiveSize()});
+btn32x32.addEventListener ('click', () =>{gridSize = 32; generateGrid(); setActiveSize()});
+btn64x64.addEventListener ('click', () =>{gridSize = 64; generateGrid(); setActiveSize()});
 
 //general buttons
 reset.addEventListener ('click', () =>{generateGrid()});
@@ -154,9 +154,30 @@ function setActiveMode() {
     };      
 }
 function setActiveSize(){
+    if (gridSize===8){
+        btn8x8.classList.add('activeBtn');
+    } else {
+        btn8x8.classList.remove('activeBtn');
+    };
+    if (gridSize===16){
+        btn16x16.classList.add('activeBtn');
+    } else {
+        btn16x16.classList.remove('activeBtn');
+    };
+    if (gridSize===32){
+        btn32x32.classList.add('activeBtn');
+    } else {
+        btn32x32.classList.remove('activeBtn');
+    };
+    if (gridSize===64){
+        btn64x64.classList.add('activeBtn');
+    } else {
+        btn64x64.classList.remove('activeBtn');
+    };      
     
 }
 
 setActiveMode()
+setActiveSize()
 generateGrid()
 
